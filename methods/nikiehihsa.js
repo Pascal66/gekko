@@ -1,7 +1,8 @@
+//To revisit
 var _ = require('lodash');
 var log = require('../core/log.js');
 
-// configuration
+// configuration 
 var config = require('../core/util.js').getConfig();
 var settings = config.nikiehihsa;
 
