@@ -51,5 +51,6 @@ if(mode === 'realtime') {
   
 
 var db = new sqlite3.Database(fullPath);
+db.run("pragma journal_mode = WAL");
 
 module.exports = db;
