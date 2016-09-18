@@ -224,7 +224,7 @@ Base.prototype.addIndicator = function(name, type, parameters) {
   this.indicators[name].input = Indicators[type].input;
 }
 
-Base.prototype.advice = function(newPosition) {
+Base.prototype.advice = function(newPosition, percent) {
   // Possible values are long and short. Long will trigger a buy method
   // while short will trigger a sell method
   var advice = 'soft';
@@ -232,9 +232,14 @@ Base.prototype.advice = function(newPosition) {
     advice = newPosition;
   }
 
+  var quantity = 100;
+  if (percent) {
+	  quantity = percent;
+  }
+  
   this.emit('advice', {
     recommendation: advice,
-    portfolio: 1,
+    portfolio: quantity,
     moment: this.candle.start
   });
 }
