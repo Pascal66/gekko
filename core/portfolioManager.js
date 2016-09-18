@@ -119,7 +119,7 @@ Manager.prototype.getBalance = function(fund) {
 // is this a directExchange? (does it support MKT orders)
 // is this a infinityOrderExchange (does it support order
 // requests bigger then the current balance?)
-Manager.prototype.trade = function(what) {
+Manager.prototype.trade = function(what, percent) {
   if(what !== 'BUY' && what !== 'SELL')
     return;
 
@@ -142,7 +142,7 @@ Manager.prototype.trade = function(what) {
       else
         price = this.ticker.ask;
 
-      this.buy(amount, price);
+      this.buy(amount * (percent / 100), price);
 
     } else if(what === 'SELL') {
 
@@ -158,7 +158,7 @@ Manager.prototype.trade = function(what) {
       else
         price = this.ticker.bid;
 
-      this.sell(amount, price);
+      this.sell(amount * (percent / 100), price);
     }
   };
   async.series([
@@ -167,6 +167,7 @@ Manager.prototype.trade = function(what) {
   ], _.bind(act, this));
 
 };
+
 
 Manager.prototype.getMinimum = function(price) {
   if(this.minimalOrder.unit === 'currency')
