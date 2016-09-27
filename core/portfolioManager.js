@@ -134,7 +134,7 @@ Manager.prototype.trade = function(what, percent) {
       if(this.infinityOrderExchange)
         amount = 10000;
       else
-        amount = this.getBalance(this.currency) / this.ticker.ask;
+        amount = this.getBalance(this.currency) * (percent / 100) / this.ticker.ask;
 
       // can we just create a MKT order?
       if(this.directExchange)
@@ -142,7 +142,7 @@ Manager.prototype.trade = function(what, percent) {
       else
         price = this.ticker.ask;
 
-      this.buy(amount * (percent / 100), price);
+      this.buy(amount , price);
 
     } else if(what === 'SELL') {
 
@@ -150,7 +150,7 @@ Manager.prototype.trade = function(what, percent) {
       if(this.infinityOrderExchange)
         amount = 10000;
       else
-        amount = this.getBalance(this.asset);
+        amount = this.getBalance(this.asset) * (percent / 100);
 
       // can we just create a MKT order?
       if(this.directExchange)
@@ -158,7 +158,7 @@ Manager.prototype.trade = function(what, percent) {
       else
         price = this.ticker.bid;
 
-      this.sell(amount * (percent / 100), price);
+      this.sell(amount , price);
     }
   };
   async.series([
