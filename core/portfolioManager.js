@@ -192,7 +192,7 @@ Manager.prototype.buy = function(amount, price) {
   // if not sufficient funds
   if(amount > available) {
     return log.info(
-      'wanted to buy but insufficient',
+      'Wanted to buy but insufficient',
       this.currency,
       '(' + available + ')',
       'at',
@@ -203,7 +203,7 @@ Manager.prototype.buy = function(amount, price) {
   // if order to small
   if(amount < minimum) {
     return log.info(
-      'wanted to buy',
+      'Wanted to sell',
       this.asset,
       'but the amount is too small',
       '(' + amount + ')',
@@ -235,9 +235,9 @@ Manager.prototype.sell = function(amount, price) {
   var availabe = this.getBalance(this.asset);
 
   // if not suficient funds
-  if(amount < availabe) {
+  if(amount > availabe) {
     return log.info(
-      'wanted to buy but insufficient',
+      'Wanted to sell but insufficient',
       this.asset,
       '(' + availabe + ')',
       'at',
@@ -248,7 +248,7 @@ Manager.prototype.sell = function(amount, price) {
   // if order to small
   if(amount < minimum) {
     return log.info(
-      'wanted to buy',
+      'Wanted to buy',
       this.currency,
       'but the amount is to small',
       '(' + amount + ')',
